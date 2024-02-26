@@ -274,7 +274,7 @@ app.get('/api/races/:raceId', async (req,res) =>
     }
 })
 // This returns the races within a given season ordered by round
-app.get('/api/races/seasons/:year', async (req,res)=>
+app.get('/api/races/season/:year', async (req,res)=>
 {
     try{
     const {data,error} = await supabase
@@ -296,7 +296,7 @@ app.get('/api/races/seasons/:year', async (req,res)=>
     }
 })
 // This returns a specific race in a year based on round
-app.get('/api/races/seasons/:year/:round', async (req,res)=>
+app.get('/api/races/season/:year/:round', async (req,res)=>
 {
     try{
     const {data,error} = await supabase
