@@ -69,6 +69,7 @@ app.get('/api/circuits/ref/:circuitRef', async (req, res) => {
 });
 
 // returns the circuits used in a given season( by ascending order)  
+/*
 app.get('/api/circuits/season/:year', async (req, res) => {
     try {
         const year = parseInt(req.params.year);
@@ -87,6 +88,27 @@ app.get('/api/circuits/season/:year', async (req, res) => {
         res.json({ error: 'Internal Server Error' });
     }
 });
+*/
+app.get('/api/circuits/seasons/:year', async (req,res) =>
+{
+    try{
+        const year = parseInt(req.params.year);
+        const {data,error} = await supabase
+        .from('circuits')
+        .select('*, races!inner()')
+        .eq('races.year',year)
+     
+        
+        if (!data || data.length === 0) {
+               res.json({ message: 'No circuits found for the specified season' });
+           } else {
+               res.json(data);
+           }
+       } catch (error) {
+           res.json({ error: 'Internal Server Error' });
+       }
+    
+})
 
 // This returns all the constructors
 app.get('/api/constructors', async (req, res) => {
