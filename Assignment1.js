@@ -89,6 +89,7 @@ app.get('/api/circuits/season/:year', async (req, res) => {
     }
 });
 */
+// This returns the circuits used in a given season (supposed to by ascending order)
 app.get('/api/circuits/seasons/:year', async (req,res) =>
 {
     try{
@@ -97,6 +98,7 @@ app.get('/api/circuits/seasons/:year', async (req,res) =>
         .from('circuits')
         .select('*, races!inner()')
         .eq('races.year',year)
+        //.order('races.round', {ascending: true}); // does not work, I believe it maybe related to not knowing the raceId.
      
         
         if (!data || data.length === 0) {
@@ -197,7 +199,6 @@ app.get('/api/drivers/search/:substring', async(req,res)=>
         .from('drivers')
         .select('*')
         .ilike('surname', `${req.params.substring}%`);
-        res.send(data);
         if(!data || data.length == 0)
         {
             res.json({message: 'Could not find driver whose surname begins with specified substring'})
@@ -260,7 +261,6 @@ app.get('/api/races/:raceId', async (req,res) =>
     .from('races')
     .select(`raceId, circuits(name, location, country )`)
     .eq('raceId',req.params.raceId );
-    res.send(data)
     if(!data || data.length == 0)
     {
         res.json({message: 'Driver not found'})
@@ -522,7 +522,7 @@ app.get('/api/standings/:raceId/drivers', async (req,res)=>
 
         const {data,error} = await supabase
         .from('driverStandings')
-        .select('*')
+        .select('*, drivers(driverRef, code, forename, surname), races(name,round,year,date)')
         .eq('raceId', req.params.raceId)
         .order('position', {ascending: true})
         if(!data || data.length == 0)
@@ -547,7 +547,7 @@ app.get('/api/standings/:raceId/constructors', async (req,res)=>
 
         const {data,error} = await supabase
         .from('constructorStandings')
-        .select('*')
+        .select('*, constructors(name,constructorRef,nationality), races(name,round,year,date)')
         .eq('raceId', req.params.raceId)
         .order('position', {ascending: true})
         if(!data || data.length == 0)
