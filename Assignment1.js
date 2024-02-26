@@ -11,10 +11,9 @@ const supaAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabase = supa.createClient(supaUrl, supaAnonKey);
 
-app.listen(8080, () => {
- console.log(' Listening at localhost, port 8080')
+app.listen(process.env.PORT || 4000, ()=>console.log("server on " + process.env.port))
 
-   }); 
+
 
 // This returns all the seasons for f1.
 app.get('/api/seasons', async (req, res) => {
@@ -51,7 +50,7 @@ app.get('/api/circuits', async (req, res) => {
 });
 
 // Returns a specified circuit.
-app.get('/api/circuits/ref/:circuitRef', async (req, res) => {
+app.get('/api/circuits/:circuitRef', async (req, res) => {
     try {
         const { data, error } = await supabase
             .from('circuits')
@@ -459,7 +458,7 @@ app.get('/api/results/driver/:driverRef', async(req,res) =>
 })
 
 // This returns all the results for a given driver between two years
-app.get('/api/results/drivers/:driverRef/seasons/:startYear/:endYear', async (req,res)=>
+app.get('/api/results/driver/:driverRef/seasons/:startYear/:endYear', async (req,res)=>
 {
     try{
     const startYear = parseInt(req.params.startYear);
