@@ -54,5 +54,5 @@ https://tundra-cloudy-guarantee.glitch.me/api/standings/1120/drivers
 
 https://tundra-cloudy-guarantee.glitch.me/api/standings/1120/constructors
 
-https://tundra-cloudy-guarantee.glitch.me//api/standings/asds/constructors
+https://tundra-cloudy-guarantee.glitch.me/api/standings/asds/constructors
 
