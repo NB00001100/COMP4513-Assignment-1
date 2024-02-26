@@ -3,7 +3,9 @@
 link to glitch website: https://tundra-cloudy-guarantee.glitch.me/
 testing:
 https://tundra-cloudy-guarantee.glitch.me/api/seasons
+
 https://tundra-cloudy-guarantee.glitch.me/api/circuits
+
 https://tundra-cloudy-guarantee.glitch.me/api/circuits/monza
 https://tundra-cloudy-guarantee.glitch.me/api/circuits/calgary
 https://tundra-cloudy-guarantee.glitch.me/api/constructors
